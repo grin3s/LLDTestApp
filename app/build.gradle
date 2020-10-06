@@ -31,7 +31,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17"
-                arguments "-DCMAKE_C_FLAGS=-fomit-frame-pointer", "-DCMAKE_CXX_FLAGS=-fomit-frame-pointer -v", "-DANDROID_LD=lld", "-DANDROID_LINKER_FLAGS=-Wl,--no-rosegment"
+                arguments "-DANDROID_LD=lld"
             }
         }
     }
