@@ -11,6 +11,7 @@ buildscript {
     }
 }
 
+//tasks.getByName("externalNativeBuildDebug").setEnabled(false)
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
@@ -30,7 +31,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17"
-                arguments "-DCMAKE_C_FLAGS=-fno-omit-frame-pointer", "-DCMAKE_CXX_FLAGS=-fno-omit-frame-pointer -v", "-DANDROID_LD=lld", "-DANDROID_LINKER_FLAGS=-Wl,--no-rosegment"
+                arguments "-DCMAKE_C_FLAGS=-fomit-frame-pointer", "-DCMAKE_CXX_FLAGS=-fomit-frame-pointer -v", "-DANDROID_LD=lld", "-DANDROID_LINKER_FLAGS=-Wl,--no-rosegment"
             }
         }
     }
@@ -48,6 +49,8 @@ android {
                 // This flag must be enabled to see properly-symbolicated native
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled true
+                strippedNativeLibsDir "/Users/gringauz/projects/LLDTestApp/app/build/intermediates/stripped_native_libs/debug/out/lib/"
+                unstrippedNativeLibsDir "/Users/gringauz/projects/LLDTestApp/app/build/intermediates/cmake/debug/obj/"
             }
         }
     }
@@ -63,10 +66,14 @@ android {
         abi {
             enable true
             reset()
-            include 'x86'
+            include 'armeabi-v7a', 'x86', 'arm64-v8a'
             universalApk false
         }
     }
+}
+
+afterEvaluate {
+//    tasks.getByName("externalNativeBuildDebug").setEnabled(false)
 }
 
 dependencies {
