@@ -31,7 +31,6 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17"
-                arguments "-DCMAKE_C_FLAGS=-fomit-frame-pointer", "-DCMAKE_CXX_FLAGS=-fomit-frame-pointer -v", "-DANDROID_LD=lld", "-DANDROID_LINKER_FLAGS=-Wl,--no-rosegment"
             }
         }
     }
@@ -66,7 +65,7 @@ android {
         abi {
             enable true
             reset()
-            include 'armeabi-v7a', 'x86', 'arm64-v8a'
+            include 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64'
             universalApk false
         }
     }
