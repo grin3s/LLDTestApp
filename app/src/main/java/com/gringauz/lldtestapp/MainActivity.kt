@@ -2,13 +2,21 @@ package com.gringauz.lldtestapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // setting random id so that it is easy to find crash for session
+        val randomUUID = UUID.randomUUID().toString()
+        FirebaseCrashlytics.getInstance().setUserId(randomUUID)
+        Log.e("CRASHUUID", randomUUID)
 
         // Example of a call to a native method
         sample_text.text = stringFromJNI()
